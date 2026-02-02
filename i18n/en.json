@@ -109,5 +109,9 @@
   "contact.cta": "Send >>",
   "contact.linkedin": "Contact me on LinkedIn",
   "contact.calendly": "Book a call (Calendly)",
-  "contact.note": "Form to connect (Netlify Forms, Formspree, etc.)."
+  "contact.note": "Form to connect (Netlify Forms, Formspree, etc.).",
+  "cookies.message": "I use analytics cookies to improve this website and understand visitor behavior.",
+  "cookies.accept": "Accept analytics",
+  "cookies.reject": "Reject",
+  "cookies.manage": "Cookie settings"
 }
