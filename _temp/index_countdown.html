@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #555;
+        }
+
+        input[type="datetime-local"],
+        input[type="text"],
+        input[type="color"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            transition: border-color 0.3s;
+        }
+
+        input[type="datetime-local"]:focus,
+        input[type="text"]:focus,
+        input[type="color"]:focus {
+            outline: none;
+            border-color: #000;
+        }
+
+        input[type="color"] {
+            padding: 4px;
+            height: 44px;
+            cursor: pointer;
+        }
+
+        .color-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .code-block {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            word-break: break-all;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .code-block:hover {
+            background: #f0f0f0;
+        }
+
+        .code-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #000;
+            background: #000;
+            color: white;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        button:hover {
+            background: #333;
+            border-color: #333;
+        }
+
+        button.secondary {
+            background: white;
+            color: #000;
+            border-color: #000;
+        }
+
+        button.secondary:hover {
+            background: #f5f5f5;
+        }
+
+        .preview-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .preview-section h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+
+        #canvas {
+            max-width: 100%;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            margin: 20px 0;
+            display: block;
+        }
+
+        .info-box {
+            background: #f0f0f0;
+            border-left: 4px solid #000;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .info-box strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .copy-btn {
+            background: #f0f0f0;
+            color: #000;
+            border: 1px solid #ddd;
+            padding: 6px 12px;
+            font-size: 12px;
+            margin-left: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .copy-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .copied {
+            color: #00aa00;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .color-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-link {
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid #000;
+        }
+
+        .info-link:hover {
+            color: #666;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .footer a {
+            color: #000;
+            text-decoration: none;
+            border-bottom: 1px solid #000;
+        }
+
+        .footer a:hover {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⏰ Countdown Timer Generator</h1>
+            <p class="subtitle">Génère des images dynamiques pour Klaviyo (100% JavaScript)</p>
+        </header>
+
+        <div class="main-grid">
+            <div class="card">
+                <h2>Configuration</h2>
+
+                <div class="form-group">
+                    <label for="endDateTime">Date et heure de fin</label>
+                    <input type="datetime-local" id="endDateTime">
+                </div>
+
+                <div class="form-group">
+                    <label>Personnalisation</label>
+                    <div class="color-row">
+                        <div>
+                            <label for="bgColor" style="text-transform: none; margin: 0 0 8px 0; font-size: 13px;">Fond</label>
+                            <input type="color" id="bgColor" value="#ffffff">
+                        </div>
+                        <div>
+                            <label for="borderColor" style="text-transform: none; margin: 0 0 8px 0; font-size: 13px;">Bordure</label>
+                            <input type="color" id="borderColor" value="#000000">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="color-row">
+                        <div>
+                            <label for="textColor" style="text-transform: none; margin: 0 0 8px 0; font-size: 13px;">Texte (heure)</label>
+                            <input type="color" id="textColor" value="#000000">
+                        </div>
+                        <div>
+                            <label for="labelColor" style="text-transform: none; margin: 0 0 8px 0; font-size: 13px;">Labels</label>
+                            <input type="color" id="labelColor" value="#666666">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="instanceId">ID unique (pour différencier les URLs)</label>
+                    <input type="text" id="instanceId" placeholder="ma-promo-2024" value="countdown1">
+                </div>
+
+                <div class="button-group">
+                    <button onclick="generateImage()">🎨 Générer l'image</button>
+                    <button class="secondary" onclick="resetToDefaults()">↺ Réinitialiser</button>
+                </div>
+
+                <div class="info-box">
+                    <strong>Comment l'utiliser dans Klaviyo :</strong>
+                    1. Clique sur "Générer l'image" <br>
+                    2. Copie l'URL (voir ci-dessous) <br>
+                    3. Dans Klaviyo : Image → Dynamic image → Colle l'URL
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>URLs & Code</h2>
+
+                <div class="form-group">
+                    <div class="code-label">📍 URL pour Klaviyo</div>
+                    <div class="code-block" id="klavio-url" onclick="copyToClipboard('klavio-url')">
+                        Clique sur "Générer l'image"
+                        <button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard('klavio-url')">Copier</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="code-label">🔗 URL directe (img src)</div>
+                    <div class="code-block" id="direct-url" onclick="copyToClipboard('direct-url')">
+                        Clique sur "Générer l'image"
+                        <button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard('direct-url')">Copier</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="code-label">⏱️ Timestamp Unix</div>
+                    <div class="code-block" id="timestamp-output">
+                        0
+                        <button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard('timestamp-output')">Copier</button>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡 Comment ça marche :</strong>
+                    L'URL contient une base64 de ta config. Elle génère une image PNG dynamique chaque fois qu'elle est chargée.
+                </div>
+            </div>
+        </div>
+
+        <div class="preview-section">
+            <h2>Aperçu</h2>
+            <canvas id="canvas" width="600" height="220"></canvas>
+            <button onclick="downloadImage()" style="width: auto;">⬇️ Télécharger l'image</button>
+        </div>
+
+        <div class="footer">
+            <p>
+                Hébergé sur <a href="https://github.com" target="_blank">GitHub Pages</a> • 
+                <a href="https://github.com/votreuser/countdown-timer" target="_blank">Voir le code source</a> • 
+                Fonctionne 100% en JavaScript
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Initialiser avec demain 23h59
+        function initializeDate() {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(23, 59, 0, 0);
+            
+            const isoString = tomorrow.toISOString().slice(0, 16);
+            document.getElementById('endDateTime').value = isoString;
+        }
+
+        // Fonction pour calculer le temps restant
+        function getCountdown(endTimestamp) {
+            const now = Date.now();
+            const diff = endTimestamp * 1000 - now;
+
+            if (diff <= 0) {
+                return { days: 0, hours: 0, minutes: 0, seconds: 0, expired: true };
+            }
+
+            const seconds = Math.floor((diff / 1000) % 60);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+            return { days, hours, minutes, seconds, expired: false };
+        }
+
+        function pad(num) {
+            return String(num).padStart(2, '0');
+        }
+
+        // Dessiner le canvas avec boîtes séparées
+        function drawCountdown(config) {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            const { days, hours, minutes, seconds, expired } = config.countdown;
+            const { bgColor, borderColor, textColor, labelColor } = config.colors;
+
+            // Fond blanc de la page
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            if (expired) {
+                ctx.fillStyle = textColor;
+                ctx.font = 'bold 48px Arial, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('Offre expirée', canvas.width / 2, canvas.height / 2);
+            } else {
+                // Paramètres des boîtes
+                const boxWidth = 130;
+                const boxHeight = 140;
+                const boxSpacing = 15;
+                const totalWidth = (boxWidth * 4) + (boxSpacing * 3);
+                const startX = (canvas.width - totalWidth) / 2;
+                const startY = 30;
+
+                // Données pour chaque boîte
+                const units = [
+                    { value: pad(days), label: 'Jours' },
+                    { value: pad(hours), label: 'Heures' },
+                    { value: pad(minutes), label: 'Minutes' },
+                    { value: pad(seconds), label: 'Secondes' }
+                ];
+
+                // Dessiner chaque boîte
+                units.forEach((unit, index) => {
+                    const boxX = startX + (index * (boxWidth + boxSpacing));
+                    const boxY = startY;
+
+                    // Fond de la boîte
+                    ctx.fillStyle = bgColor;
+                    ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
+
+                    // Bordure de la boîte
+                    ctx.strokeStyle = borderColor;
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
+
+                    // Valeur (grand texte)
+                    ctx.fillStyle = textColor;
+                    ctx.font = 'bold 64px "Courier New", monospace';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(unit.value, boxX + boxWidth / 2, boxY + 65);
+
+                    // Label
+                    ctx.font = 'bold 12px Arial, sans-serif';
+                    ctx.fillStyle = labelColor;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(unit.label, boxX + boxWidth / 2, boxY + 120);
+                });
+            }
+        }
+
+        // Générer l'image
+        function generateImage() {
+            const dateInput = document.getElementById('endDateTime').value;
+            if (!dateInput) {
+                alert('Sélectionne une date et heure !');
+                return;
+            }
+
+            const endDate = new Date(dateInput);
+            const endTimestamp = Math.floor(endDate.getTime() / 1000);
+
+            const countdown = getCountdown(endTimestamp);
+
+            const colors = {
+                bgColor: document.getElementById('bgColor').value,
+                borderColor: document.getElementById('borderColor').value,
+                textColor: document.getElementById('textColor').value,
+                labelColor: document.getElementById('labelColor').value
+            };
+
+            const config = {
+                countdown,
+                colors,
+                end: endTimestamp
+            };
+
+            // Dessiner le canvas
+            drawCountdown(config);
+
+            // Générer les URLs
+            const configString = JSON.stringify(config);
+            const base64Config = btoa(configString);
+            const pageUrl = window.location.origin + window.location.pathname;
+
+            const klavio_url = `${pageUrl}?config=${base64Config}`;
+            const direct_url = `${pageUrl}?config=${base64Config}&raw=1`;
+
+            document.getElementById('klavio-url').innerHTML = klavio_url + '<button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard(\'klavio-url\')">Copier</button>';
+            document.getElementById('direct-url').innerHTML = direct_url + '<button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard(\'direct-url\')">Copier</button>';
+            document.getElementById('timestamp-output').innerHTML = endTimestamp + '<button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard(\'timestamp-output\')">Copier</button>';
+        }
+
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent.split('Copier')[0].trim();
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                const original = btn.textContent;
+                btn.textContent = '✓ Copié !';
+                setTimeout(() => {
+                    btn.textContent = original;
+                }, 2000);
+            });
+        }
+
+        function downloadImage() {
+            const canvas = document.getElementById('canvas');
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'countdown.png';
+            link.click();
+        }
+
+        function resetToDefaults() {
+            document.getElementById('bgColor').value = '#ffffff';
+            document.getElementById('borderColor').value = '#000000';
+            document.getElementById('textColor').value = '#000000';
+            document.getElementById('labelColor').value = '#666666';
+            initializeDate();
+            generateImage();
+        }
+
+        // Charger la config depuis l'URL si elle existe
+        function loadFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const configParam = params.get('config');
+
+            if (configParam) {
+                try {
+                    const config = JSON.parse(atob(configParam));
+                    const isRaw = params.get('raw') === '1';
+
+                    if (isRaw) {
+                        // Mode "image brute" - affiche directement le PNG
+                        const canvas = document.createElement('canvas');
+                        canvas.width = 600;
+                        canvas.height = 220;
+                        const ctx = canvas.getContext('2d');
+
+                        // Recalculer le countdown à chaque chargement
+                        const currentCountdown = getCountdown(config.end);
+
+                        // Fond blanc
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                        if (currentCountdown.expired) {
+                            ctx.fillStyle = config.colors.textColor;
+                            ctx.font = 'bold 48px Arial, sans-serif';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText('Offre expirée', canvas.width / 2, canvas.height / 2);
+                        } else {
+                            // Paramètres des boîtes
+                            const boxWidth = 130;
+                            const boxHeight = 140;
+                            const boxSpacing = 15;
+                            const totalWidth = (boxWidth * 4) + (boxSpacing * 3);
+                            const startX = (canvas.width - totalWidth) / 2;
+                            const startY = 30;
+
+                            // Données pour chaque boîte
+                            const units = [
+                                { value: pad(currentCountdown.days), label: 'Jours' },
+                                { value: pad(currentCountdown.hours), label: 'Heures' },
+                                { value: pad(currentCountdown.minutes), label: 'Minutes' },
+                                { value: pad(currentCountdown.seconds), label: 'Secondes' }
+                            ];
+
+                            // Dessiner chaque boîte
+                            units.forEach((unit, index) => {
+                                const boxX = startX + (index * (boxWidth + boxSpacing));
+                                const boxY = startY;
+
+                                // Fond de la boîte
+                                ctx.fillStyle = config.colors.bgColor;
+                                ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
+
+                                // Bordure de la boîte
+                                ctx.strokeStyle = config.colors.borderColor;
+                                ctx.lineWidth = 2;
+                                ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
+
+                                // Valeur (grand texte)
+                                ctx.fillStyle = config.colors.textColor;
+                                ctx.font = 'bold 64px "Courier New", monospace';
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'middle';
+                                ctx.fillText(unit.value, boxX + boxWidth / 2, boxY + 65);
+
+                                // Label
+                                ctx.font = 'bold 12px Arial, sans-serif';
+                                ctx.fillStyle = config.colors.labelColor;
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'middle';
+                                ctx.fillText(unit.label, boxX + boxWidth / 2, boxY + 120);
+                            });
+                        }
+
+                        // Envoyer comme PNG
+                        canvas.toBlob(blob => {
+                            const response = new Response(blob, { 
+                                headers: { 
+                                    'Content-Type': 'image/png',
+                                    'Cache-Control': 'no-cache, max-age=300'
+                                } 
+                            });
+                        });
+                    }
+                } catch (e) {
+                    console.error('Erreur lecture config:', e);
+                }
+            }
+        }
+
+        // Initialiser au chargement
+        window.addEventListener('load', () => {
+            initializeDate();
+            generateImage();
+            loadFromUrl();
+        });
+
+        // Mettre à jour l'aperçu en temps réel
+        document.getElementById('endDateTime').addEventListener('change', generateImage);
+        document.getElementById('bgColor').addEventListener('change', generateImage);
+        document.getElementById('borderColor').addEventListener('change', generateImage);
+        document.getElementById('textColor').addEventListener('change', generateImage);
+        document.getElementById('labelColor').addEventListener('change', generateImage);
+    </script>
+</body>
+</html>
