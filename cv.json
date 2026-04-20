@@ -1,0 +1,429 @@
+{
+  "personal_information": {
+    "first_name": "Julie",
+    "last_name": "Dubois",
+    "full_name": "Julie Dubois",
+    "title": "Data-driven Customer Experience, Analytics & Digital Growth Specialist",
+    "years_of_experience": "18+",
+    "location": {
+      "city": "Ath",
+      "country": "Belgium"
+    },
+    "contact": {
+      "email": "hello@juliedubois.be",
+      "phone": "+32 497 60 52 53"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "url": "https://www.linkedin.com/in/ACoAAAKY9r0B0f3gpS3VUgnv625kR2zYx9FAQzA/"
+      }
+    ],
+    "summary": "As a data-driven Customer Experience specialist, I transform complex user behavior and digital interaction data into actionable insights. I specialize in mapping end-to-end customer journeys, identifying friction points through analytics, and collaborating with cross-functional teams to drive meaningful improvements. By leveraging data, experimentation and UX best practices, I consistently enhance conversion rates, customer satisfaction and long-term brand loyalty."
+  },
+
+
+  "technical_knowledge": {
+    "analytics_data_tracking": [
+      "Adobe Analytics & Adobe Launch",
+      "Google Analytics (GA4), Google Tag Manager",
+      "Contentsquare, Matomo",
+      "Looker Studio (dashboards & reporting)",
+      "Tagging plans, data governance, data quality",
+      "Cross-platform tracking (web & mobile)",
+      "Customer journey analysis & performance measurement"
+    ],
+    "front_end_web_technologies": [
+      "HTML, CSS / SASS / SCSS, JavaScript",
+      "ReactJS, GraphQL, Twig",
+      "Frameworks & libraries: Foundation, Bootstrap, Bulma, GatsbyJS, Astro",
+      "Responsive, scalable and accessibility-focused development (WAI / WCAG)",
+      "Strong understanding of component-based architecture and reusable design systems"
+    ],
+    "back_end_data_programming": [
+      "PHP, MySQL",
+      "Python, R (data analysis & scripting)",
+      "APIs, data structures, integrations between product, analytics and marketing environments"
+    ],
+    "cms_digital_platforms": [
+      "WordPress, Magento, Shopify, CraftCMS",
+      "Drupal, Prestashop",
+      "Magnolia, TeamSite",
+      "Content migration & CMS optimization",
+      "SEO continuity, performance optimization and large-scale content governance"
+    ],
+    "seo_cro_digital_performance": [
+      "Technical SEO, on-page SEO, content optimization",
+      "Conversion Rate Optimization (CRO) & A/B testing",
+      "Keyword research & competitive analysis (Search Console, SEMrush, WooRank)",
+      "Paid media fundamentals (Google Ads)",
+      "SEO & performance embedded into design and development decisions"
+    ],
+    "automation_design_tools": [
+      "n8n (workflow automation)",
+      "Adobe Creative Suite, Figma",
+      "Image & video generation tools",
+      "Git, Jira",
+      "Comfortable working at the intersection of automation, design, analytics and experimentation"
+    ]
+  },
+
+  "functional_knowledge": {
+    "customer_experience_cro": [
+      "Customer journey mapping and end-to-end UX analysis",
+      "Quantitative & qualitative analysis of user behavior",
+      "Conversion Rate Optimization (CRO) and experimentation",
+      "A/B testing, hypothesis definition and result interpretation",
+      "Continuous performance optimization and improvement cycles"
+    ],
+    "digital_marketing_growth": [
+      "Performance-driven digital marketing strategies",
+      "Content strategy, optimization and distribution",
+      "Synergy between SEO, paid media and analytics",
+      "Data-informed growth initiatives across acquisition and retention funnels"
+    ],
+    "business_functional_analysis": [
+      "Business requirements gathering and clarification",
+      "Gap analysis and solution design",
+      "Translation of business and marketing needs into technical and analytics requirements",
+      "Data-driven recommendations supporting strategic decision-making"
+    ],
+    "project_stakeholder_management": [
+      "Agile & Scrum methodologies",
+      "Planning, coordination and delivery of cross-functional initiatives",
+      "Stakeholder management across business, marketing and IT teams",
+      "Reporting, alignment and communication at operational and management levels"
+    ],
+    "testing_optimization": [
+      "A/B testing and experimentation frameworks",
+      "Functional testing and analytics QA",
+      "Performance monitoring and validation of digital features",
+      "Iterative optimization based on data insights"
+    ]
+  },
+
+  "industry_knowledge": [
+    "E-commerce & Retail",
+    "Banking & Financial Services",
+    "Media & Digital Platforms",
+    "Telecommunications",
+    "Consumer Services",
+    "Energy"
+  ],
+
+  "languages": [
+    { "language": "French", "level": "Native" },
+    { "language": "English", "level": "Professional (C1)" },
+    { "language": "Dutch", "level": "Intermediate (B1, actively improving)" },
+    { "language": "Swedish", "level": "Basic" },
+    { "language": "Spanish", "level": "Basic" }
+  ],
+
+  "professional_experience": [
+    {
+      "company": "CBTW",
+      "engagement_type": "CBTW internal",
+      "role": "Digital Marketer & Analytics Specialist",
+      "location": "Brussels, Belgium",
+      "start_date": "2023-01",
+      "end_date": "Present",
+      "industry": "Digital Transformation / Consulting",
+      "context_of_the_project": "Hybrid role supporting multiple European clients at the intersection of analytics, digital marketing, SEO, CRO and front-end development, with a strong focus on data-driven decision-making and business impact.",
+      "tasks_and_responsibilities": [
+        "Collect, analyze and interpret data related to user behavior, website performance and digital marketing activities.",
+        "Translate analytics insights into actionable strategic recommendations for marketing, product and UX teams.",
+        "Define and maintain tagging plans, analytics documentation and governance for new or evolving digital features.",
+        "Build and maintain dashboards (Looker Studio, Adobe Analytics) to monitor performance and support operational and management decision-making.",
+        "Analyze market trends, audience behavior and competitor strategies to inform digital and content strategies.",
+        "Develop and execute SEO-friendly content strategies (blogs, newsletters, social media and other digital channels).",
+        "Create comprehensive digital marketing plans aligned with business objectives.",
+        "Collaborate closely with developers, designers, marketers and stakeholders in agile, cross-functional environments."
+      ],
+      "key_achievements_and_impact": [
+        "Managed multiple digital marketing and analytics projects for clients across Europe.",
+        "Improved visibility, engagement and conversion through data-driven digital strategies.",
+        "Increased analytics reliability and adoption by aligning tracking implementation with business and product needs.",
+        "Acted as a bridge between technical teams and marketing stakeholders, accelerating delivery and alignment across projects."
+      ],
+      "methodologies_technical_functional_environment": "Matomo\nGoogle suite (analytics, tag manager, looker, ads)\nMeta business"
+    },
+
+    {
+      "company": "Stanley/Stella",
+      "engagement_type": "CBTW mission",
+      "role": "Design System & Content Migration",
+      "location": "Brussels, Belgium",
+      "start_date": "2023-04",
+      "end_date": "Present",
+      "industry": "Fashion / E-commerce",
+      "context_of_the_project": "Led the migration of a large content ecosystem from a legacy platform to Magento, while designing a scalable and future-proof design system.",
+      "tasks_and_responsibilities": [
+        "Define and oversee the end-to-end content migration strategy, including data mapping, segmentation and validation.",
+        "Ensure SEO continuity, analytics tracking consistency and data integrity throughout the migration.",
+        "Design and govern a centralized design system including UI components, accessibility standards and usage guidelines.",
+        "Embed analytics, SEO and accessibility considerations directly into design and front-end decisions.",
+        "Coordinate content, development, IT and business teams to ensure smooth execution."
+      ],
+      "key_achievements_and_impact": [
+        "Delivered a seamless platform migration with minimal SEO and performance impact.",
+        "Built a reusable design system serving as a foundation for multiple websites and event landing pages.",
+        "Reduced maintenance costs and accelerated time-to-market through standardized components and patterns."
+      ],
+      "methodologies_technical_functional_environment": "Magento, Tailwind CSS, Storyblok, Adobe Creative Suite, Creative problem solving, Piwik PRO"
+    },
+
+    {
+      "company": "BNP Paribas Fortis",
+      "engagement_type": "CBTW mission",
+      "role": "Analytics Tech Lead",
+      "location": "Brussels, Belgium",
+      "start_date": "2023-01",
+      "end_date": "2023-06",
+      "industry": "Banking & Financial Services",
+      "team": "10",
+      "context_of_the_project": "Owned the technical analytics architecture across multiple digital platforms (web & mobile) in a complex, regulated environment.",
+      "tasks_and_responsibilities": [
+        "Lead the implementation of Adobe Launch, Adobe Analytics and Contentsquare across websites and applications.",
+        "Design and maintain cross-platform tracking strategies for a unified customer journey view.",
+        "Provide technical guidance to developers on tracking best practices and implementation.",
+        "Perform advanced QA and testing using Perfecto to simulate mobile environments.",
+        "Ensure data accuracy, consistency and compliance."
+      ],
+      "key_achievements_and_impact": [
+        "Delivered cross-platform analytics tracking, enabling holistic customer journey analysis.",
+        "Increased confidence in analytics data across product, marketing and business teams.",
+        "Strengthened analytics maturity within development workflows."
+      ],
+      "methodologies_technical_functional_environment": "Adobe Launch, Adobe Analytics, Contentsquare, Perfecto"
+    },
+
+    {
+      "company": "BNP Paribas Fortis",
+      "engagement_type": "CBTW mission",
+      "role": "Digital Analyst",
+      "location": "Brussels, Belgium",
+      "start_date": "2021-11",
+      "end_date": "2023-02",
+      "industry": "Banking & Financial Services",
+      "team": "10",
+      "context_of_the_project": "Focused on transforming raw digital data into insights to improve UX, performance and strategic decision-making.",
+      "tasks_and_responsibilities": [
+        "Collect, analyze and interpret quantitative, qualitative and usability data.",
+        "Define tagging plans and analytics requirements for new features and releases.",
+        "Deliver insights and recommendations to product, UX and marketing teams.",
+        "Support continuous optimization initiatives across digital channels."
+      ],
+      "key_achievements_and_impact": [
+        "Embedded analytics tagging as a mandatory step in QA and release processes.",
+        "Significantly improved data quality, simplifying reporting and analysis.",
+        "Raised awareness and adoption of analytics best practices among developers."
+      ],
+      "methodologies_technical_functional_environment": "Adobe Launch, Adobe Analytics, Contentsquare, Perfecto"
+    },
+
+    {
+      "company": "MediaMarkt",
+      "engagement_type": "CBTW mission",
+      "role": "Webmaster · CRO & Customer Journey Expert",
+      "location": "Zele, Belgium",
+      "start_date": "2020-12",
+      "end_date": "2021-11",
+      "industry": "E-commerce / Retail",
+      "team": "15",
+      "context_of_the_project": "Optimized the end-to-end customer journey in a large international e-commerce environment.",
+      "tasks_and_responsibilities": [
+        "Analyze customer journeys across key entry points (homepage, category, landing pages).",
+        "Lead A/B testing and CRO initiatives to improve conversion and UX.",
+        "Support front-end teams with technical guidance and reusable components.",
+        "Manage CMS and product catalog structures.",
+        "Improve SEO performance and monitor competitor positioning."
+      ],
+      "key_achievements_and_impact": [
+        "Increased conversion through data-driven UX and CRO improvements.",
+        "Enabled faster international feature rollouts via reusable front-end solutions.",
+        "Strengthened collaboration between business, IT and UX teams."
+      ],
+      "methodologies_technical_functional_environment": "HTML/CSS, JavaScript, Fact-finder, Elastic search, Google Tag Manager, Google analytics, Google Optimise, Teamsite CMS, Optimizely"
+    },
+
+    {
+      "company": "Proximus",
+      "engagement_type": "CBTW mission",
+      "role": "Front-End Developer (PICKX Platform & Proximus.be)",
+      "location": "Brussels, Belgium",
+      "start_date": "2018-01",
+      "end_date": "2020-11",
+      "industry": "Telecommunications",
+      "teams": "20–40",
+      "context_of_the_project": "Worked on high-traffic, content-heavy platforms with strong UX, accessibility and scalability constraints.",
+      "tasks_and_responsibilities": [
+        "Develop reusable front-end templates and components for dynamic, data-driven pages.",
+        "Maintain and evolve a shared HTML/CSS component library (design system).",
+        "Ensure accessibility compliance (WAI standards).",
+        "Contribute to complex e-commerce order flows with flexible front-end logic."
+      ],
+      "key_achievements_and_impact": [
+        "Reduced development and maintenance effort through shared component libraries.",
+        "Improved consistency and accessibility across multiple platforms.",
+        "Successfully delivered features across multiple teams and parallel projects."
+      ],
+      "methodologies_technical_functional_environment": "HTML, SASS, Bootstrap, Javascript, PHP, Twig, Git, Scrum, Jira"
+    },
+
+    {
+      "company": "Engie",
+      "engagement_type": "CBTW mission",
+      "role": "Front-End Developer · Project Manager",
+      "location": "Brussels, Belgium",
+      "start_date": "2016-12",
+      "end_date": "2018-01",
+      "industry": "Energy",
+      "team": "20",
+      "context_of_the_project": "Combined hands-on development with project coordination in large-scale digital initiatives.",
+      "tasks_and_responsibilities": [
+        "Contribute to website rebranding and ongoing CMS maintenance.",
+        "Create reusable CMS components and email templates.",
+        "Lead the Engie blog project and Google Analytics implementation.",
+        "Coordinate timelines, stakeholders and deliverables.",
+        "Participate in innovation projects (IoT concepts, chatbot PoC)."
+      ],
+      "key_achievements_and_impact": [
+        "Played a key role in major digital transformation initiatives.",
+        "Delivered innovative proof-of-concepts adopted by the business.",
+        "Strengthened collaboration between technical and non-technical teams."
+      ],
+      "methodologies_technical_functional_environment": "HTML - SASS - Javascript - image edition - PHP - Wordpress - FTL (freemarker) - Teamsite - Smartfocus - API - Android development - GIT - NodeJS - Scrum - Google Analytics - Jira"
+    }
+  ],
+
+  "earlier_career": {
+    "period": "2007-2016",
+    "title": "Earlier Career (2007 – 2016)",
+    "full_text": "Web Developer · Designer · SEO Specialist\nIndustries: Marketing, Media, Healthcare, Technology\n\nProgressive career across agencies and clients, covering:\n• Front-end and web development\n• Certified SEO and digital marketing\n• CMS implementation (WordPress, Magento, Drupal)\n• Design, multimedia and creative production",
+    "notable_roles_from_previous_jsonresume": [
+      {
+        "company": "Harvey Nash",
+        "role": "Webdesigner - integrator @ Proximus",
+        "start_date": "2013-08",
+        "end_date": "2016-11"
+      },
+      {
+        "company": "WebDigitales",
+        "role": "Webmaster /  sales technician",
+        "start_date": "2012-06",
+        "end_date": "2012-12"
+      },
+      {
+        "company": "ProduWeb",
+        "role": "SEO specialist",
+        "start_date": "2011-03",
+        "end_date": "2012-06"
+      },
+      {
+        "company": "ProduWeb",
+        "role": "Webdesigner",
+        "start_date": "2010-05",
+        "end_date": "2011-03"
+      },
+      {
+        "company": "STX-Med",
+        "role": "Web and Print Designer",
+        "start_date": "2009-12",
+        "end_date": "2010-05"
+      },
+      {
+        "company": "Tagora",
+        "role": "Flash developer",
+        "start_date": "2009-10",
+        "end_date": "2009-12"
+      },
+      {
+        "company": "Bureau347",
+        "role": "Web developer",
+        "start_date": "2008-12",
+        "end_date": "2009-05"
+      },
+      {
+        "company": "Polygone Group",
+        "role": "Web and Print Designer",
+        "start_date": "2007-08",
+        "end_date": "2007-09"
+      }
+    ]
+  },
+
+  "education": {
+    "formal_education": [
+      {
+        "year": 2024,
+        "title": "Data-Driven Design for Customer Experience (CX)",
+        "institution": "University of Cambridge"
+      },
+      {
+        "year": 2020,
+        "title": "Professional Certificate in Data Science",
+        "institution": "Harvard (edX)"
+      },
+      {
+        "year": 2013,
+        "title": "IT Project Management",
+        "institution": "Technofutur TIC"
+      },
+      {
+        "year": 2007,
+        "title": "Web Developer Certificate",
+        "institution": "STE-Formations, Université de Liège (ULG)"
+      },
+      {
+        "year": 2006,
+        "title": "Graphic Design (1st & 2nd years)",
+        "institution": "Haute École Albert Jacquard"
+      }
+    ]
+  },
+
+  "trainings_certifications": [
+    {
+      "year": 2023,
+      "title": "Fundamentals of architecture design",
+      "issuer": "CGMA | Computer Graphics Master Academy",
+      "url": null
+    },
+    {
+      "year": 2022,
+      "title": "Themed Environment Design",
+      "issuer": "CGMA | Computer Graphics Master Academy",
+      "url": null
+    },
+    {
+      "year": 2021,
+      "title": "Conversion Rate Optimization (CRO) Expert",
+      "issuer": "Udemy",
+      "url": "https://www.udemy.com/certificate/UC-c16e9e93-fe3c-4653-83b5-82b9ae1e21fc/"
+    },
+    {
+      "year": 2021,
+      "title": "Google Tag Manager Fundamentals",
+      "issuer": "Google Academy",
+      "url": "https://analytics.google.com/analytics/academy/certificate/eC7pijsYSniZUwmvucDfLA"
+    },
+    {
+      "year": 2021,
+      "title": "Advanced Google Analytics",
+      "issuer": "Google Academy",
+      "url": "https://analytics.google.com/analytics/academy/certificate/ESheMtI5RT6lUv3VOI0xew"
+    },
+    {
+      "year": 2012,
+      "title": "Veejaying & Visual Creation (Modul8, Resolume Avenue)",
+      "issuer": "Technofutur TIC",
+      "url": null
+    },
+    {
+      "year": 2011,
+      "title": "SEO Expert Certification",
+      "issuer": "SEO Camp",
+      "url": null
+    }
+  ]
+}
