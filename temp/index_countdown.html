@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown Timer Generator</title>
+    <title>Countdown Timer GIF Generator</title>
     <style>
         * {
             margin: 0;
@@ -75,7 +75,8 @@
 
         input[type="datetime-local"],
         input[type="text"],
-        input[type="color"] {
+        input[type="color"],
+        input[type="range"] {
             width: 100%;
             padding: 10px 12px;
             border: 2px solid #ddd;
@@ -87,7 +88,8 @@
 
         input[type="datetime-local"]:focus,
         input[type="text"]:focus,
-        input[type="color"]:focus {
+        input[type="color"]:focus,
+        input[type="range"]:focus {
             outline: none;
             border-color: #000;
         }
@@ -165,6 +167,12 @@
             background: #f5f5f5;
         }
 
+        button:disabled {
+            background: #ccc;
+            border-color: #ccc;
+            cursor: not-allowed;
+        }
+
         .preview-section {
             background: white;
             border-radius: 12px;
@@ -180,12 +188,36 @@
             padding-bottom: 10px;
         }
 
-        #canvas {
+        #preview-gif {
             max-width: 100%;
             border: 2px solid #ddd;
             border-radius: 6px;
             margin: 20px 0;
             display: block;
+            min-height: 220px;
+            background: #f9f9f9;
+        }
+
+        .loading {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+            font-size: 14px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #000;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .info-box {
@@ -218,9 +250,18 @@
             background: #e0e0e0;
         }
 
-        .copied {
-            color: #00aa00;
+        .slider-group {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .slider-value {
+            min-width: 50px;
+            text-align: right;
             font-weight: 600;
+            font-size: 14px;
         }
 
         @media (max-width: 768px) {
@@ -235,17 +276,6 @@
             .color-row {
                 grid-template-columns: 1fr;
             }
-        }
-
-        .info-link {
-            color: #000;
-            text-decoration: none;
-            font-weight: 600;
-            border-bottom: 2px solid #000;
-        }
-
-        .info-link:hover {
-            color: #666;
         }
 
         .footer {
@@ -269,8 +299,8 @@
 <body>
     <div class="container">
         <header>
-            <h1>⏰ Countdown Timer Generator</h1>
-            <p class="subtitle">Génère des images dynamiques pour Klaviyo (100% JavaScript)</p>
+            <h1>⏰ Countdown Timer GIF Generator</h1>
+            <p class="subtitle">Génère des GIF animés pour Klaviyo (100% JavaScript)</p>
         </header>
 
         <div class="main-grid">
@@ -299,7 +329,7 @@
                 <div class="form-group">
                     <div class="color-row">
                         <div>
-                            <label for="textColor" style="text-transform: none; margin: 0 0 8px 0; font-size: 13px;">Texte (heure)</label>
+                            <label for="textColor" style="text-transform: none; margin: 0 0 8px 0; font-size: 13px;">Texte</label>
                             <input type="color" id="textColor" value="#000000">
                         </div>
                         <div>
@@ -310,18 +340,21 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="instanceId">ID unique (pour différencier les URLs)</label>
-                    <input type="text" id="instanceId" placeholder="ma-promo-2024" value="countdown1">
+                    <label for="frameDuration">Durée par frame (ms)</label>
+                    <div class="slider-group">
+                        <input type="range" id="frameDuration" min="100" max="1000" value="500" step="50">
+                        <span class="slider-value"><span id="frameDurationValue">500</span>ms</span>
+                    </div>
                 </div>
 
                 <div class="button-group">
-                    <button onclick="generateImage()">🎨 Générer l'image</button>
+                    <button id="generateBtn" onclick="generateGIF()">🎬 Générer le GIF</button>
                     <button class="secondary" onclick="resetToDefaults()">↺ Réinitialiser</button>
                 </div>
 
                 <div class="info-box">
                     <strong>Comment l'utiliser dans Klaviyo :</strong>
-                    1. Clique sur "Générer l'image" <br>
+                    1. Clique sur "Générer le GIF" <br>
                     2. Copie l'URL (voir ci-dessous) <br>
                     3. Dans Klaviyo : Image → Dynamic image → Colle l'URL
                 </div>
@@ -333,7 +366,7 @@
                 <div class="form-group">
                     <div class="code-label">📍 URL pour Klaviyo</div>
                     <div class="code-block" id="klavio-url" onclick="copyToClipboard('klavio-url')">
-                        Clique sur "Générer l'image"
+                        Clique sur "Générer le GIF"
                         <button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard('klavio-url')">Copier</button>
                     </div>
                 </div>
@@ -341,40 +374,35 @@
                 <div class="form-group">
                     <div class="code-label">🔗 URL directe (img src)</div>
                     <div class="code-block" id="direct-url" onclick="copyToClipboard('direct-url')">
-                        Clique sur "Générer l'image"
+                        Clique sur "Générer le GIF"
                         <button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard('direct-url')">Copier</button>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="code-label">⏱️ Timestamp Unix</div>
-                    <div class="code-block" id="timestamp-output">
-                        0
-                        <button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard('timestamp-output')">Copier</button>
                     </div>
                 </div>
 
                 <div class="info-box">
                     <strong>💡 Comment ça marche :</strong>
-                    L'URL contient une base64 de ta config. Elle génère une image PNG dynamique chaque fois qu'elle est chargée.
+                    L'URL contient une config base64. À chaque chargement, elle génère un nouveau GIF avec les secondes qui défilent !
                 </div>
             </div>
         </div>
 
         <div class="preview-section">
             <h2>Aperçu</h2>
-            <canvas id="canvas" width="600" height="220"></canvas>
-            <button onclick="downloadImage()" style="width: auto;">⬇️ Télécharger l'image</button>
+            <div id="preview-container">
+                <img id="preview-gif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Aperçu du GIF">
+            </div>
         </div>
 
         <div class="footer">
             <p>
-                Hébergé sur <a href="https://github.com" target="_blank">GitHub Pages</a> • 
-                <a href="https://github.com/votreuser/countdown-timer" target="_blank">Voir le code source</a> • 
-                Fonctionne 100% en JavaScript
+                Hébergé sur <a href="https://github.com" target="_blank">GitHub Pages</a> •
+                GIF généré en JavaScript avec <a href="https://github.com/jnordberg/gif.js/" target="_blank">gif.js</a>
             </p>
         </div>
     </div>
+
+    <!-- Charger gif.js depuis CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js"></script>
 
     <script>
         // Initialiser avec demain 23h59
@@ -382,7 +410,7 @@
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
             tomorrow.setHours(23, 59, 0, 0);
-            
+
             const isoString = tomorrow.toISOString().slice(0, 16);
             document.getElementById('endDateTime').value = isoString;
         }
@@ -408,19 +436,20 @@
             return String(num).padStart(2, '0');
         }
 
-        // Dessiner le canvas avec boîtes séparées
-        function drawCountdown(config) {
-            const canvas = document.getElementById('canvas');
-            const ctx = canvas.getContext('2d');
-
-            const { days, hours, minutes, seconds, expired } = config.countdown;
+        // Dessiner un frame du countdown
+        function drawFrame(ctx, config, overrideSeconds = null) {
             const { bgColor, borderColor, textColor, labelColor } = config.colors;
+            const canvas = ctx.canvas;
 
-            // Fond blanc de la page
+            // Fond blanc
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            if (expired) {
+            const countdown = overrideSeconds !== null
+                ? { ...config.countdown, seconds: overrideSeconds }
+                : config.countdown;
+
+            if (countdown.expired) {
                 ctx.fillStyle = textColor;
                 ctx.font = 'bold 48px Arial, sans-serif';
                 ctx.textAlign = 'center';
@@ -437,10 +466,10 @@
 
                 // Données pour chaque boîte
                 const units = [
-                    { value: pad(days), label: 'Jours' },
-                    { value: pad(hours), label: 'Heures' },
-                    { value: pad(minutes), label: 'Minutes' },
-                    { value: pad(seconds), label: 'Secondes' }
+                    { value: pad(countdown.days), label: 'Jours' },
+                    { value: pad(countdown.hours), label: 'Heures' },
+                    { value: pad(countdown.minutes), label: 'Minutes' },
+                    { value: pad(countdown.seconds), label: 'Secondes' }
                 ];
 
                 // Dessiner chaque boîte
@@ -474,17 +503,20 @@
             }
         }
 
-        // Générer l'image
-        function generateImage() {
+        // Générer le GIF
+        function generateGIF() {
             const dateInput = document.getElementById('endDateTime').value;
             if (!dateInput) {
                 alert('Sélectionne une date et heure !');
                 return;
             }
 
+            const generateBtn = document.getElementById('generateBtn');
+            generateBtn.disabled = true;
+            generateBtn.textContent = '⏳ Génération en cours...';
+
             const endDate = new Date(dateInput);
             const endTimestamp = Math.floor(endDate.getTime() / 1000);
-
             const countdown = getCountdown(endTimestamp);
 
             const colors = {
@@ -494,26 +526,64 @@
                 labelColor: document.getElementById('labelColor').value
             };
 
+            const frameDuration = parseInt(document.getElementById('frameDuration').value);
+
             const config = {
                 countdown,
                 colors,
                 end: endTimestamp
             };
 
-            // Dessiner le canvas
-            drawCountdown(config);
+            // Créer le GIF
+            const gif = new GIF({
+                workers: 2,
+                quality: 10,
+                width: 600,
+                height: 220,
+                workerScript: 'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js'
+            });
 
-            // Générer les URLs
-            const configString = JSON.stringify(config);
-            const base64Config = btoa(configString);
-            const pageUrl = window.location.origin + window.location.pathname;
+            // Créer un canvas pour dessiner
+            const canvas = document.createElement('canvas');
+            canvas.width = 600;
+            canvas.height = 220;
+            const ctx = canvas.getContext('2d');
 
-            const klavio_url = `${pageUrl}?config=${base64Config}`;
-            const direct_url = `${pageUrl}?config=${base64Config}&raw=1`;
+            // Ajouter les frames (60 secondes qui défilent)
+            for (let i = 59; i >= 0; i--) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawFrame(ctx, config, i);
+                gif.addFrame(canvas, { delay: frameDuration });
+            }
 
-            document.getElementById('klavio-url').innerHTML = klavio_url + '<button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard(\'klavio-url\')">Copier</button>';
-            document.getElementById('direct-url').innerHTML = direct_url + '<button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard(\'direct-url\')">Copier</button>';
-            document.getElementById('timestamp-output').innerHTML = endTimestamp + '<button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard(\'timestamp-output\')">Copier</button>';
+            // Quand le GIF est généré
+            gif.on('finished', function(blob) {
+                // Créer une URL blob
+                const blobUrl = URL.createObjectURL(blob);
+
+                // Afficher l'aperçu
+                document.getElementById('preview-gif').src = blobUrl;
+
+                // Générer les URLs
+                const configString = JSON.stringify(config);
+                const base64Config = btoa(configString);
+                const pageUrl = window.location.origin + window.location.pathname;
+
+                const klavio_url = `${pageUrl}?config=${base64Config}`;
+                const direct_url = `${pageUrl}?config=${base64Config}&raw=1`;
+
+                document.getElementById('klavio-url').innerHTML = klavio_url + '<button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard(\'klavio-url\')">Copier</button>';
+                document.getElementById('direct-url').innerHTML = direct_url + '<button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard(\'direct-url\')">Copier</button>';
+
+                // Stocker le blob pour le téléchargement
+                window.gifBlob = blob;
+
+                generateBtn.disabled = false;
+                generateBtn.textContent = '🎬 Générer le GIF';
+            });
+
+            // Lancer la génération
+            gif.render();
         }
 
         function copyToClipboard(elementId) {
@@ -529,11 +599,15 @@
             });
         }
 
-        function downloadImage() {
-            const canvas = document.getElementById('canvas');
+        function downloadGIF() {
+            if (!window.gifBlob) {
+                alert('Génère le GIF d\'abord !');
+                return;
+            }
+            const url = URL.createObjectURL(window.gifBlob);
             const link = document.createElement('a');
-            link.href = canvas.toDataURL('image/png');
-            link.download = 'countdown.png';
+            link.href = url;
+            link.download = 'countdown.gif';
             link.click();
         }
 
@@ -542,116 +616,20 @@
             document.getElementById('borderColor').value = '#000000';
             document.getElementById('textColor').value = '#000000';
             document.getElementById('labelColor').value = '#666666';
+            document.getElementById('frameDuration').value = '500';
+            document.getElementById('frameDurationValue').textContent = '500';
             initializeDate();
-            generateImage();
         }
 
-        // Charger la config depuis l'URL si elle existe
-        function loadFromUrl() {
-            const params = new URLSearchParams(window.location.search);
-            const configParam = params.get('config');
-
-            if (configParam) {
-                try {
-                    const config = JSON.parse(atob(configParam));
-                    const isRaw = params.get('raw') === '1';
-
-                    if (isRaw) {
-                        // Mode "image brute" - affiche directement le PNG
-                        const canvas = document.createElement('canvas');
-                        canvas.width = 600;
-                        canvas.height = 220;
-                        const ctx = canvas.getContext('2d');
-
-                        // Recalculer le countdown à chaque chargement
-                        const currentCountdown = getCountdown(config.end);
-
-                        // Fond blanc
-                        ctx.fillStyle = '#ffffff';
-                        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                        if (currentCountdown.expired) {
-                            ctx.fillStyle = config.colors.textColor;
-                            ctx.font = 'bold 48px Arial, sans-serif';
-                            ctx.textAlign = 'center';
-                            ctx.textBaseline = 'middle';
-                            ctx.fillText('Offre expirée', canvas.width / 2, canvas.height / 2);
-                        } else {
-                            // Paramètres des boîtes
-                            const boxWidth = 130;
-                            const boxHeight = 140;
-                            const boxSpacing = 15;
-                            const totalWidth = (boxWidth * 4) + (boxSpacing * 3);
-                            const startX = (canvas.width - totalWidth) / 2;
-                            const startY = 30;
-
-                            // Données pour chaque boîte
-                            const units = [
-                                { value: pad(currentCountdown.days), label: 'Jours' },
-                                { value: pad(currentCountdown.hours), label: 'Heures' },
-                                { value: pad(currentCountdown.minutes), label: 'Minutes' },
-                                { value: pad(currentCountdown.seconds), label: 'Secondes' }
-                            ];
-
-                            // Dessiner chaque boîte
-                            units.forEach((unit, index) => {
-                                const boxX = startX + (index * (boxWidth + boxSpacing));
-                                const boxY = startY;
-
-                                // Fond de la boîte
-                                ctx.fillStyle = config.colors.bgColor;
-                                ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
-
-                                // Bordure de la boîte
-                                ctx.strokeStyle = config.colors.borderColor;
-                                ctx.lineWidth = 2;
-                                ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
-
-                                // Valeur (grand texte)
-                                ctx.fillStyle = config.colors.textColor;
-                                ctx.font = 'bold 64px "Courier New", monospace';
-                                ctx.textAlign = 'center';
-                                ctx.textBaseline = 'middle';
-                                ctx.fillText(unit.value, boxX + boxWidth / 2, boxY + 65);
-
-                                // Label
-                                ctx.font = 'bold 12px Arial, sans-serif';
-                                ctx.fillStyle = config.colors.labelColor;
-                                ctx.textAlign = 'center';
-                                ctx.textBaseline = 'middle';
-                                ctx.fillText(unit.label, boxX + boxWidth / 2, boxY + 120);
-                            });
-                        }
-
-                        // Envoyer comme PNG
-                        canvas.toBlob(blob => {
-                            const response = new Response(blob, { 
-                                headers: { 
-                                    'Content-Type': 'image/png',
-                                    'Cache-Control': 'no-cache, max-age=300'
-                                } 
-                            });
-                        });
-                    }
-                } catch (e) {
-                    console.error('Erreur lecture config:', e);
-                }
-            }
-        }
+        // Update slider value display
+        document.getElementById('frameDuration').addEventListener('input', function() {
+            document.getElementById('frameDurationValue').textContent = this.value;
+        });
 
         // Initialiser au chargement
         window.addEventListener('load', () => {
             initializeDate();
-            generateImage();
-            loadFromUrl();
         });
-
-        // Mettre à jour l'aperçu en temps réel
-        document.getElementById('endDateTime').addEventListener('change', generateImage);
-        document.getElementById('bgColor').addEventListener('change', generateImage);
-        document.getElementById('borderColor').addEventListener('change', generateImage);
-        document.getElementById('textColor').addEventListener('change', generateImage);
-        document.getElementById('labelColor').addEventListener('change', generateImage);
     </script>
 </body>
 </html>
